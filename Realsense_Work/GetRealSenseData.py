@@ -6,9 +6,8 @@ author: Xihan Ma
 '''
 import numpy as np
 from cv2 import cv2
-from GetSurfaceNorm import *
+from GetSurfaceNormal import *
 from pyrealsense2 import pyrealsense2 as rs
-
 
 class GetRealSenseData():
     __pipeline = rs.pipeline()
