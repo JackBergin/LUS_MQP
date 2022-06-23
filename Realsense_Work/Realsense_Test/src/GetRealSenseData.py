@@ -140,8 +140,8 @@ if __name__ == "__main__":
             break
         get_realsense_data.stream_depth2color_aligned()
         color_depth_stack = np.vstack(
-            (get_realsense_data.color_image))
+            (get_realsense_data.color_image, get_realsense_data.depth_colormap))
 
-        filename = 'RGB-Img'
+        filename = 'RGB-Img-Test-1'
         cv2.imshow(str(filename), color_depth_stack)
-        cv2.imwrite('Realsense_Work/Realsense_Test/results' + str(filename) + '.png', color_depth_stack)
+        cv2.imwrite('Realsense_Work/Realsense_Test/results/' + str(filename) + '.png', get_realsense_data.color_image)

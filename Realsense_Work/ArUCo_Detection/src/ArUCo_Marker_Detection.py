@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import pandas as pd
  
-filename = "ArUCo_Marker_Final_Test"
+filename = "RGB-Img-Test-1"
 frame = cv2.imread('Realsense_Work/ArUCo_Detection/image/'+filename+'.png')
 plt.figure()
 plt.imshow(frame)
@@ -66,12 +66,12 @@ if len(corners) > 0:
      0.5, (0, 255, 0), 2)
    print("[INFO] ArUco marker ID: {}".format(markerID))
    # show the output frame
-   cv2.imwrite('Realsense_Work/ArUCo_Detection/type' + str(filename) + '_det.png', frame)
+   cv2.imwrite('Realsense_Work/ArUCo_Detection/type/' + str(filename) + '_det.png', frame)
  plt.imshow(frame_markers)
 print(p)
 p = np.array(p)
 p = p.reshape((len(ids), 3))
 print(p.shape)
 print(p)
-np.save('Realsense_Work/ArUCo_Detection/type' + str(filename) + '.npy', p)
+np.save('Realsense_Work/ArUCo_Detection/type/' + str(filename) + '.npy', p)
 
