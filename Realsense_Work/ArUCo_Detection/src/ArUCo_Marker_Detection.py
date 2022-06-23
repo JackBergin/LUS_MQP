@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import pandas as pd
  
-filename = "ArucoTest"
+filename = "ArUCo_Marker_Final_Test"
 frame = cv2.imread('Realsense_Work/ArUCo_Detection/image/'+filename+'.png')
 plt.figure()
 plt.imshow(frame)
