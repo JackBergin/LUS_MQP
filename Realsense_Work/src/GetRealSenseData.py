@@ -5,7 +5,7 @@ wraps around pyrealsense2
 author: Xihan Ma
 '''
 import numpy as np
-from cv2 import cv2
+import cv2 as cv2
 from GetSurfaceNormal import *
 from pyrealsense2 import pyrealsense2 as rs
 

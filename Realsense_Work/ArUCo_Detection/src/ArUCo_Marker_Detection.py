@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import pandas as pd
  
-filename = "ArucoTest_Color"
+filename = "ArucoTest"
 frame = cv2.imread('Realsense_Work/ArUCo_Detection/image/'+filename+'.png')
 plt.figure()
 plt.imshow(frame)
@@ -73,5 +73,5 @@ p = np.array(p)
 p = p.reshape((len(ids), 3))
 print(p.shape)
 print(p)
-np.save(str(filename) + '.npy', p)
+np.save('Realsense_Work/ArUCo_Detection/type' + str(filename) + '.npy', p)
 
