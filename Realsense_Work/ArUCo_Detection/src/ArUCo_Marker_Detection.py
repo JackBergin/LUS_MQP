@@ -9,7 +9,12 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import pandas as pd
  
-filename = "RGB-Img-Test-1"
+'''
+Get the necessary code for the Realsense to fill above the ArUCo tag work.
+'''
+
+
+filename = "Test_ArUCo_Real_And_Projector_Color"
 frame = cv2.imread('Realsense_Work/ArUCo_Detection/image/'+filename+'.png')
 plt.figure()
 plt.imshow(frame)
@@ -74,4 +79,6 @@ p = p.reshape((len(ids), 3))
 print(p.shape)
 print(p)
 np.save('Realsense_Work/ArUCo_Detection/type/' + str(filename) + '.npy', p)
+
+#This next part will require the parsing of the detected ArUCo Markers to create bounds
 
