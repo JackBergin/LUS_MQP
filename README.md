@@ -1,5 +1,5 @@
 # MQP - Lung Ultrasound Body Detection and 3D Projection Mapping System
-##I. Evaluation of Hardware
+## I. Evaluation of Hardware
 
      Within this project several things had to be tested in order for the procedure of calibration to be implemented. The first test run in this project was to test the viability of the hardware. From the previous MQP it was already known that the RealSense camera would be the best option for the depth and location readings for the projector. The untested hardware in this case, was the projector so a few tests were run in order to test its viability. When beginning this project, the distance of the projector to the patient was not known. A test was run in which the projector was turned on and then moved to a wall to properly size the pane that it was projecting. This was done to test and find the distance that would cover an individual's sternum while allowing for movement of the patient. The test determined that 1 meter was the distance best suited for the projector. The projector was then tested in varying cases of light to determine the best lighting for visibility and sharpness of image.
 
@@ -12,7 +12,7 @@ Table 1. Testing Environment Constraints of AnyBeam Projector
      From the test results run above, it was determined that the optimal testing environment for the projector would be a dim lit room. This would allow for the operators to view the room as well as make sense of what is being projected on the patient. Experiments run on the hardware proved a few things. The first was that this was a viable option for projection mapping in a dim to light room. It was also confirmed that the needed height for the projector is 1 meter for the patient which can interface into virtually any operating room which would be equipped with this device. 
 
 
-##II. Difficulties with Setup and Compatibility
+## II. Difficulties with Setup and Compatibility
 
      The setup for RealSense was different from that of the setup for the previous group. Not only was the camera set up on different hardware, but on a different operating system while also being run through virtual machines. The work instructions for the RealSense SDK and ROS wrappers were for Ubuntu 18.04 where, in this case, 20.04 was being used. Due to this debugging and updates to the installation instructions were required, namely with the server permissions Intel included to download the package containing all of the RealSense libraries needed. Once the SDK and the library was fully set up, a test was run to see if the camera was working. RealSense View was used in this case (and executed through terminal) allowing for the user to see the depth sensor and motion capturing of the RealSense. A problem that was quickly found, however, was with Viewer being run once, exited, and then not being able to boot again without having to hard reset the camera (plug and unplug). Upon first look at the problem, signs pointed to the cable, hardware itself, or some form of ROS incompatibility but after scrupulous testing, it was determined the problem was due to the virtual machine, Parallels. This machine in its settings requires the user to grant it permissions to use USB devices connected to the local machine. Due to this, a reset for the RealSense camera was integrated into the code in order for the code to work on a repeatable basis. Once learning more about Parallels, permissions were granted for it to have full access to the camera upon plugin with the local machine. 
 
@@ -20,7 +20,7 @@ Table 1. Testing Environment Constraints of AnyBeam Projector
 
      One of the biggest struggles within this project thus far has been with the CMAKE dependencies within C. The libraries that people have made required some very difficult setup and it required a lot of debugging to do so. In order to keep track of the things I debugged and fixed, I delegated an entire notebook towards debugging and brainstorming for this project. A recent roadblock for this project was in regards to the AprilTag detection. In C, the dependencies to get this working with the Realsense camera was incredibly difficult. To fix this problem sooner rather than later, the repository being kept on this project along with all of the code was switched over to python. This also would make the densePose to Realsense pipeline practically seamless because it can be run off of the same general program. 
 
-##III. Projection Mapping Research
+## III. Projection Mapping Research
 
      While the DensePose integration side of things was put on hold, the preliminary research into the projector was pursued. In this time, several platforms were considered for the calibration, rendering, and graphics end of things for the projector. The first two platforms that were considered were Blender  and Unreal Engine. Both Blender and Unreal Engine had heavy graphics abilities and the ability to live render on different use cases of projection and special effects (such as Extended Reality walls for Unreal Engine). Upon inspection of Blender, it was found that it would be valuable to use because the software already is prepared to do most of the rendering for the 3D projection mapping. Eevee (a third party software extended from Blender) would be the extension used to live render the experience. When looking into Unreal Engine, it was quickly found that integration of its coordinates to the projector and RealSense would cause much more work to be done. It was also found that with Unreal, the extension into 3D projection mapping is headed by a 3rd party that had little to no documentation. The live rendering for Unreal Engine also takes a lot of computing power (depending on the size of experience). Since the size of experience in this case is relatively small eg. constrained to the patient's chest, there would be relatively little difficulty in being able to render this but there would most likely be general lag due to the hardware we have access to to live render with.
 
@@ -38,11 +38,11 @@ Table 1. Testing Environment Constraints of AnyBeam Projector
 
     Figure 5. Initial test script's execution of OpenGL using a translation to center its red point coordinates to match with the RealSense Viewer (0,0) point based on Viewer's single depth reading. The vantage point of this image is from the RealSense Viewer box.
 
-##IV. Progress with OpenGL and RealSense
+## IV. Progress with OpenGL and RealSense
 
      Once the test scripts for OpenGL and RealSense were working in parallel, they were then combined in order to create a preliminary calibration test for the RealSense and OpenGL. Upon activating RealSense View and OpenGL simultaneously, the offset of the RealSense camera and projector was adjusted and then eliminated. A correlation between pixel frame and RealSense frame was created. Since depth was the next step to account for, the projector, while streaming on RealSense View and OpenGL, was moved closer and farther from the wall. What was found with this test was that the centered point would move on a linear y=x path off from its adjusted offset. To fix this, it was decided that an updating variable was integrated into the x,y coordinate of the projector to account for the 3D axis and the projected center point was able to stay centered. This then uncovered a problem. The way OpenGL works is by accessing a blocking loop for its graphics. Efforts are still going towards this to fix this blocking problem and create code that can “render'' its projection. The next step within this test would be the inclusion of point specific depths and their prospective projections. Currently the camera is reading only one depth which is its origin point’s Zed axis. By including several more points and different depths then the calibration of the system can be done. It should be noted that there was a GitHub repository created holding all of the code for this along with documentation on the code’s inner workings and the how-to to set it up [5]. 
 
-##V. Initial Calibration Tests
+## V. Initial Calibration Tests
 
      The first calibration test done within the project was done while testing the Hardware of the projector in different lighting and distances. A checkerboard that matched the 1280p x 720p [10] of the projector was then projected and RealSense Viewer was used to see the offset of the projector's center and the camera's center. 
 
@@ -58,7 +58,7 @@ Table 1. Testing Environment Constraints of AnyBeam Projector
 
     Figures 7 & 8 (From left to right). Figure 7 is the centered view of the OpenGL and RealSense at a depth of 1 meter. Figure 8 is the Centered view of the OpenGL and RealSense at a depth of 1 foot. As one can see the distortion of this change in depth has a linear correlation down the black line in the above image.
 
-This calibration testing was only for when the projector was at a set distance of 1 meter. Through implementing the static calibration, the result in figure 9 was achieved.
+    This calibration testing was only for when the projector was at a set distance of 1 meter. Through implementing the static calibration, the result in figure 9 was achieved.
 
 <img width="854" alt="Screen Shot 2022-06-29 at 2 46 23 AM" src="https://user-images.githubusercontent.com/81708456/178124050-f1b6ba3a-e459-4db0-b525-dd74d9a8e0c7.png">
 
@@ -101,7 +101,7 @@ This calibration testing was only for when the projector was at a set distance o
 
      To properly visualize the point cloud being collected by the Realsense, I 3D plotted it all. Next I made it 2D, taking away the depth component to better visualize the X, Y axises. From there, I cropped a desired area from the 2D point cloud graph, and then, once cropped, added the depth component back into the graph. The axises in all of the graphs above are in meters. The importance of including the point cloud in this camera calibration is that now, knowing depth, we can warp the projection for the 3D projection mapping effect. 
 
-##VII. AprilTag Detection
+## VII. AprilTag Detection
 
      In order to properly crop the point cloud, a form of border detection of the projector would be required. For this, it was believed that AprilTags would be the best fit. “AprilTags are a visual fiducial system, useful for a wide variety of tasks including augmented reality, robotics, and camera calibration” [2]. Sadly, this portion of the project was where progress was halted due to the utilization of some C libraries within the Realsense code. Initially, to test the output of the AprilTag detection a simulation was run.
 
@@ -111,7 +111,7 @@ This calibration testing was only for when the projector was at a set distance o
 
      Once this was completed, the next step was to integrate this development within the Realsense code that was already working. In an attempt to get the libraries functioning, about two weeks were set aside. After diving deep into debugging the library, it was found that the problem was within the “make” command located within the “CMakeList.txt” file. Once this was corrected, the library was able to run but the detection of the AprilTag was still not a success. After closer examination of the code it was found that the hardware and software being utilized was not compatible with one another (for the Realsense code library to work, it was contingent on the Realsense camera being in the T series rather than in the D series which is what we are currently using). It was then decided by the MQP advisor and TAs that it would be better if the C code was converted to python and that ArUCo markers were utilized over the AprilTags due to simplicity’s sake. ArUCo markers are similar to that of AprilTags, acting as binary fiduciary markers, however they take full utilization of the OpenCV library which integrates very well into the python pipeline as well [3]. 
 
-##VIII. ArUCo Marker Detection
+## VIII. ArUCo Marker Detection
 
      In order for an ArUCo marker to be detected, the first step was importing the image from the Realsense into OpenCV in a grayscale format. From there, the ArUCo marker being used in the image would have to match the ArUCo dictionary within OpenCV. In this case, we are using “aruco.DICT_6X6_250”. Once it was confirmed that the markers being used were within this dictionary, the command “aruco.detectMarkers” was executed. Once this command was completed I was able to extrapolate all of the necessary points and data from the detected marker. To better understand the mathematics behind the ArUCo marker detection, the following flow chart provides a high-level overview of the methodologies.
 
@@ -151,7 +151,7 @@ This calibration testing was only for when the projector was at a set distance o
 
      The “estimated” frame points were derived from projecting the above image and then launching the Realsense Viewer app. From there, the points were recorded and graphed alongside the ArUCo marker points. This was done not only to understand the ArUCo marker data but also to see how these points would correspond with the Realsense points. As seen above the ArUCo markers coordinate system and the Realsense coordinate system correspond directly. After completing all of the necessary tests for the ArUCo markers, the next step was to convert the OpenGL code utilized within the C code portion of this project to python. After installing one library, “pyopengl”, OpenGL was running perfectly on the python end of things and it was already in non-blocking form in regards to code integration for the projection mapping graphics and densePose detection. 
 
-IX. Calibration Input & Output
+## IX. Calibration Input & Output
 
      The methodology for calibration in this project is very similar to the illustration in Figure 13, with the only difference being the ArUCo markers are now in the place of the QR markers. The input for this calibration is a color image from the Realsense camera capturing the projected ArUCo markers that bound the workspace of the projector and of the subject we will eventually be using this for. Output from this process will be the 2D pixel coordinates of the ArUCo markers which correspond to the 2D pixel coordinates of the realsense.
 
@@ -163,10 +163,10 @@ IX. Calibration Input & Output
 
      It should also be noted that each iteration of the calibration will have these results making them very easy to reproduce. The above tests were run several times in order to see the reliability of the readings. When the camera and projector are moved, there will be an adjustment in these results in the depth frame but the X and Y bounds will stay consistent as long as the projector and camera are kept untouched. As soon as the projector and Realsense camera are moved, calibration must be run again. This is due to the work space for the camera and the workspace for the projector not being properly aligned from the previous calibration. If one were to continue with the uncalibrated system there will be discrepancies in the projection’s accuracy as well as the 3D projection mapping effect. 
 
-##X. Static Projection Mapping Test
+## X. Static Projection Mapping Test
 
      In order for the static projection mapping test to take place, there needed to be a conversion from the ArUCo marker 2D image coordinates to the 3D coordinate system of the Realsense. Even though testing showed that the Realsense coordinate system and ArUCo marker coordinate system corresponded with one another, the point cloud generated from the Realsense operated in the realm of meters rather than 2D image coordinates. Due to this, the 2D pixel coordinate system to 3D workspace coordinate system conversion took place with the Realsense SDK.
      
-##XI. Densepose Integration Pipeline
+## XI. Densepose Integration Pipeline
 
      Currently, the steps to integrate Densepose into the camera projector system are undergoing. As progress is being made with the projection mapping side of the project, progress on the Densepose algorithm end has also been taking place. Kechiev Brimbraw is currently implementing revisions into the algorithm that will improve upon its reliability of mapping to a patient. The pipeline will require the live data from the DensePose algorithm to be injected into the current projection mapping process of the projector. This creates a general pipeline of RealSense to DensePose code, and then DensePose code to the projection mapping code, and from there to the projector. It should be noted that the DensePose code and the projection mapping code will be running together and updating to live render the work instructions or results of the LUS on the patient. Due to the code being changed from C to Python, the ease of combining the densePose and Realsense pose has increased drastically. The original plan was to utilize ROS in the C Realsense script along with ROS in the densePose Python script for the cropped pointcloud to be transmitted between the two. Since both of these functions are now in the same language, it’s now just a matter of combining the scripts for them to work in a non-blocking manner. 
