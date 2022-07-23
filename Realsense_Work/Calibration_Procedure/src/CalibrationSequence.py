@@ -12,7 +12,8 @@ import pandas as pd
 import cv2 as cv2
 from GetSurfaceNormal import *
 from pyrealsense2 import pyrealsense2 as rs
- 
+
+import csv
 '''
 Get the necessary code for the Realsense to fill above the ArUCo tag work.
 '''
@@ -217,8 +218,13 @@ if __name__ == "__main__":
         print(p.shape)
         print(p)
         
-        np.save('Realsense_Work/Calibration_Procedure/type/' + str(filename) + '.npy', p)
+        with open('Realsense_Work/Projection_Rendering/calibratedWorkSpace.csv', 'w') as f:
+            writer = csv.writer(f)
+            for i in range(p.length()):
+               writer.writerow(p(i))
 
+        np.save('Realsense_Work/Calibration_Procedure/type/' + str(filename) + '.npy', p)
+        
         csv.write(p)
         #This next part will require the parsing of the detected ArUCo Markers to create bounds
 
