@@ -219,6 +219,7 @@ if __name__ == "__main__":
         
         np.save('Realsense_Work/Calibration_Procedure/type/' + str(filename) + '.npy', p)
 
+        csv.write(p)
         #This next part will require the parsing of the detected ArUCo Markers to create bounds
 
 
