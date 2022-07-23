@@ -209,13 +209,14 @@ if __name__ == "__main__":
             0.5, (0, 255, 0), 2)
           print("[INFO] ArUco marker ID: {}".format(markerID))
           # show the output frame
-          cv2.imwrite('RRealsense_Work/Calibration_Procedure/type/' + str(filename) + '_det.png', frame)
+          cv2.imwrite('Realsense_Work/Calibration_Procedure/type/' + str(filename) + '_det.png', frame)
         plt.imshow(frame_markers)
         print(p)
         p = np.array(p)
         p = p.reshape((len(ids), 3))
         print(p.shape)
         print(p)
+        
         np.save('Realsense_Work/Calibration_Procedure/type/' + str(filename) + '.npy', p)
 
         #This next part will require the parsing of the detected ArUCo Markers to create bounds
