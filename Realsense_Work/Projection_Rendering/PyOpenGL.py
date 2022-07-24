@@ -5,11 +5,13 @@
 #localized to the realsense's reference frame
 
 
+from cmath import nan
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 import csv
 from cv2 import pointPolygonTest
+from numpy import NAN
 
 from regex import F
 
@@ -59,23 +61,64 @@ def getCalibrationPoints():
 
     return floatID, floatX, floatY
 
-def convertCalibrationPoints():
+def convertCalibrationPoints(imageCoordX, imageCoordY):
     id, x, y = getCalibrationPoints()
-    print(id)
-    print(x)
-    print(y)
+
+    minXBound = min(x)
+    minYBound = min(y)
+    maxXBound = max(x)
+    maxYBound = max(y)
+    averageX = ((maxXBound-minXBound)/2)+minXBound
+    averageY = ((maxYBound-minYBound)/2)+minYBound
+    
+    print(minXBound)
+    print(minYBound)
+    print(maxXBound)
+    print(maxYBound)
+    print(averageX)
+    print(averageY)
+
+    convertedXPoint = 0
+    convertedYPoint = 0
+    
+
+    if((minXBound <= imageCoordX) and (imageCoordX <= maxXBound)):
+        if(imageCoordX < averageX):
+            convertedXPoint = -minXBound/imageCoordX
+        elif(imageCoordX > averageX ):
+            convertedXPoint = imageCoordX/maxXBound
+        else:
+            convertedXPoint = 0
+    else:
+        print("Out of X range!")
+
+
+    if((minYBound <= imageCoordY) and (imageCoordY <= maxYBound)):
+        if(imageCoordY < averageY):
+            convertedYPoint = minYBound/imageCoordY
+        elif(imageCoordY > averageY):
+            convertedYPoint = -imageCoordY/maxYBound
+        else:
+            convertedYPoint = 0
+    else:
+        print("Out of Y range!")
+
+
+    print(convertedXPoint)
+    print(convertedYPoint)
+    return convertedXPoint,convertedYPoint
+
 
 
 def main():
-    
-    convertCalibrationPoints()
+    xPoint, yPoint = convertCalibrationPoints(250,250)
     glutInit()
     glutInitDisplayMode(GLUT_RGB)
     glutInitWindowSize(1370, 720)
     glutInitWindowPosition(0, 0)
     glutCreateWindow("Point")
     glutDisplayFunc(plot_Point)
-    glTranslated(0,0,0.0)
+    glTranslated(xPoint,yPoint,0.0)
     clearScreen()
     glutMainLoop()
 
