@@ -71,32 +71,23 @@ def convertCalibrationPoints(imageCoordX, imageCoordY):
     averageX = ((maxXBound-minXBound)/2)+minXBound
     averageY = ((maxYBound-minYBound)/2)+minYBound
     
-    # Helpful tests for val visualization
-    print(minXBound)
-    print(minYBound)
-    print(maxXBound)
-    print(maxYBound)
     print(averageX)
     print(averageY)
-
-    convertedXPoint = 0
-    convertedYPoint = 0
-
-    if((minXBound <= imageCoordX) and (imageCoordX <= maxXBound)):
+    if((minXBound < imageCoordX) and (imageCoordX < maxXBound)):
         if(imageCoordX < averageX):
-            convertedXPoint = -minXBound/imageCoordX
-        elif(imageCoordX > averageX ):
-            convertedXPoint = imageCoordX/maxXBound
+            convertedXPoint = -1+(imageCoordX-minXBound)/(averageX-minXBound)
+        elif(imageCoordX > averageX):
+            convertedXPoint = (maxXBound-imageCoordX)/(maxXBound-averageX)
         else:
             convertedXPoint = 0
     else:
         print("Out of X range!")
 
-    if((minYBound <= imageCoordY) and (imageCoordY <= maxYBound)):
-        if(imageCoordY < averageY):
-            convertedYPoint = minYBound/imageCoordY
-        elif(imageCoordY > averageY):
-            convertedYPoint = -imageCoordY/maxYBound
+    if((minYBound < imageCoordY) and (imageCoordY < maxYBound)):
+        if(imageCoordY > averageY):
+            convertedYPoint = (imageCoordY-maxYBound)/(maxYBound-averageY)
+        elif(imageCoordY < averageY):
+            convertedYPoint = (imageCoordY-minYBound)/(averageY-minYBound)
         else:
             convertedYPoint = 0
     else:
@@ -108,7 +99,8 @@ def convertCalibrationPoints(imageCoordX, imageCoordY):
     return convertedXPoint,convertedYPoint
 
 def main():
-    xPoint, yPoint = convertCalibrationPoints(379.5,296.5)
+    xPoint, yPoint = convertCalibrationPoints(200, 350)
+
     glutInit()
     glutInitDisplayMode(GLUT_RGB)
     glutInitWindowSize(1370, 720)
