@@ -12,7 +12,8 @@ import pandas as pd
 import cv2 as cv2
 from GetSurfaceNormal import *
 from pyrealsense2 import pyrealsense2 as rs
- 
+
+import csv
 '''
 Get the necessary code for the Realsense to fill above the ArUCo tag work.
 '''
@@ -135,10 +136,18 @@ class CalibrationSequence():
         pos = points[0, :]
         return norm, pos
 
+    def hardware_reset_RS(void):
+        print("reset start")
+        ctx = rs.context()
+        devices = ctx.query_devices()
+        for dev in devices:
+            dev.hardware_reset()
+        print("reset done")
 
 # test case
 if __name__ == "__main__":
     get_realsense_data = CalibrationSequence()
+    get_realsense_data.hardware_reset_RS()
     cv2.namedWindow('RGB-depth', cv2.WINDOW_AUTOSIZE)
     while True:
         key = cv2.waitKey(10)
@@ -214,12 +223,18 @@ if __name__ == "__main__":
         print(p)
         p = np.array(p)
         p = p.reshape((len(ids), 3))
-        print(p.shape)
-        print(p)
+        print(p.size)
         
+        with open('Realsense_Work/Projection_Rendering/calibratedWorkSpace.csv', 'w') as f:
+            writer = csv.writer(f)
+            for i in range(len(ids)):
+               writer.writerow(p[i])
+
+        with open('Realsense_Work/Projection_Rendering/testCorners.csv', 'w') as f:
+            writer = csv.writer(f)
+            for i in range(len(ids)):
+               writer.writerow(corners)
+
         np.save('Realsense_Work/Calibration_Procedure/type/' + str(filename) + '.npy', p)
-
-        csv.write(p)
-        #This next part will require the parsing of the detected ArUCo Markers to create bounds
-
+    
 
