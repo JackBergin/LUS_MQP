@@ -230,6 +230,10 @@ if __name__ == "__main__":
             for i in range(len(ids)):
                writer.writerow(p[i])
 
+        with open('Realsense_Work/Projection_Rendering/testCorners.csv', 'w') as f:
+            writer = csv.writer(f)
+            for i in range(len(ids)):
+               writer.writerow(corners)
 
         np.save('Realsense_Work/Calibration_Procedure/type/' + str(filename) + '.npy', p)
     

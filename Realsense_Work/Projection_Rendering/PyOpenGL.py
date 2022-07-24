@@ -73,11 +73,12 @@ def convertCalibrationPoints(imageCoordX, imageCoordY):
     
     print(averageX)
     print(averageY)
+
     if((minXBound < imageCoordX) and (imageCoordX < maxXBound)):
         if(imageCoordX < averageX):
-            convertedXPoint = -1+(imageCoordX-minXBound)/(averageX-minXBound)
+            convertedXPoint = -1*(1-(imageCoordX-minXBound)/(averageX-minXBound))
         elif(imageCoordX > averageX):
-            convertedXPoint = (maxXBound-imageCoordX)/(maxXBound-averageX)
+            convertedXPoint = 1-(maxXBound-imageCoordX)/(maxXBound-averageX)
         else:
             convertedXPoint = 0
     else:
@@ -85,9 +86,9 @@ def convertCalibrationPoints(imageCoordX, imageCoordY):
 
     if((minYBound < imageCoordY) and (imageCoordY < maxYBound)):
         if(imageCoordY > averageY):
-            convertedYPoint = (imageCoordY-maxYBound)/(maxYBound-averageY)
+            convertedYPoint = -1-(imageCoordY-maxYBound)/(maxYBound-averageY)
         elif(imageCoordY < averageY):
-            convertedYPoint = (imageCoordY-minYBound)/(averageY-minYBound)
+            convertedYPoint = 1-(imageCoordY-minYBound)/(averageY-minYBound)
         else:
             convertedYPoint = 0
     else:
@@ -99,7 +100,7 @@ def convertCalibrationPoints(imageCoordX, imageCoordY):
     return convertedXPoint,convertedYPoint
 
 def main():
-    xPoint, yPoint = convertCalibrationPoints(200, 350)
+    xPoint, yPoint = convertCalibrationPoints(395, 274)
 
     glutInit()
     glutInitDisplayMode(GLUT_RGB)
