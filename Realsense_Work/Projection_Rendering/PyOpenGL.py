@@ -1,8 +1,8 @@
 #! /usr/bin/env python3
 
-#Within this script, we will be able to inject the realsense coordinate information (hopefully)
-#and then from there be able to localize a projection within our anybeam projector on to the wall
-#localized to the realsense's reference frame
+# Within this script, we will be able to inject the realsense coordinate information (hopefully)
+# and then from there be able to localize a projection within our anybeam projector on to the wall
+# localized to the realsense's reference frame
 
 
 from cmath import nan
@@ -16,7 +16,7 @@ from numpy import NAN
 from regex import F
 
 def plot_Point():
-    #This function will plot a point in the center of the screen
+    # This function will plot a point in the center of the screen
     glClear(GL_COLOR_BUFFER_BIT)
     glColor3f(0.0,1.0,0.0)
     glPointSize(5.0)
@@ -26,12 +26,12 @@ def plot_Point():
     glFlush()
 
 def clearScreen():
-    #This function will flush out the screen from prior graphics
+    # This function will flush out the screen from prior graphics
     glClearColor(0.0, 0.0, 0.0, 1.0)
     gluOrtho2D(-1.0, 1.0,-1.0,1.0)
 
 def getCalibrationPoints():
-    #This function will read the calibration points/points of interest from subject
+    # This function will read the calibration points/points of interest from subject
     id = []
     x = []
     y = []
@@ -42,7 +42,7 @@ def getCalibrationPoints():
             x.append(row[1])
             y.append(row[2])
     
-    #Data cleaning portion
+    # Data cleaning portion
     id = [i.replace('(', '') for i in id]
     y = [i.replace(')', '') for i in y]
     y = [i.replace(' ', '') for i in y]    
@@ -71,6 +71,7 @@ def convertCalibrationPoints(imageCoordX, imageCoordY):
     averageX = ((maxXBound-minXBound)/2)+minXBound
     averageY = ((maxYBound-minYBound)/2)+minYBound
     
+    # Helpful tests for val visualization
     print(minXBound)
     print(minYBound)
     print(maxXBound)
@@ -80,7 +81,6 @@ def convertCalibrationPoints(imageCoordX, imageCoordY):
 
     convertedXPoint = 0
     convertedYPoint = 0
-    
 
     if((minXBound <= imageCoordX) and (imageCoordX <= maxXBound)):
         if(imageCoordX < averageX):
@@ -91,7 +91,6 @@ def convertCalibrationPoints(imageCoordX, imageCoordY):
             convertedXPoint = 0
     else:
         print("Out of X range!")
-
 
     if((minYBound <= imageCoordY) and (imageCoordY <= maxYBound)):
         if(imageCoordY < averageY):
@@ -108,10 +107,8 @@ def convertCalibrationPoints(imageCoordX, imageCoordY):
     print(convertedYPoint)
     return convertedXPoint,convertedYPoint
 
-
-
 def main():
-    xPoint, yPoint = convertCalibrationPoints(250,250)
+    xPoint, yPoint = convertCalibrationPoints(379.5,296.5)
     glutInit()
     glutInitDisplayMode(GLUT_RGB)
     glutInitWindowSize(1370, 720)
