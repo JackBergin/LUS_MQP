@@ -1,0 +1,15 @@
+{
+  "python.autoComplete.extraPaths": [
+    "/home/xihan/anaconda2/lib/python2.7/dist-packages",
+    "/detectron/utils"
+  ],
+  "python.formatting.autopep8Args": [
+    "--max-line-length=110",
+    "--indent-size=2"
+  ],
+  "python.analysis.extraPaths": [
+    "/home/xihan/anaconda2/lib/python2.7/dist-packages",
+    "/detectron/utils"
+  ],
+  "cmake.configureOnOpen": false
+}
