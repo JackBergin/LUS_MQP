@@ -100,7 +100,7 @@ def convertCalibrationPoints(imageCoordX, imageCoordY):
     return convertedXPoint,convertedYPoint
 
 def main():
-    xPoint, yPoint = convertCalibrationPoints(395, 274)
+    xPoint, yPoint = convertCalibrationPoints(385, 277)
 
     glutInit()
     glutInitDisplayMode(GLUT_RGB)
