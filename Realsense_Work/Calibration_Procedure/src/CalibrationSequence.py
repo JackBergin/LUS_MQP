@@ -2,7 +2,7 @@
 
 # import the necessary packages
 import numpy as np
-import cv2, PIL, os
+import cv2, os
 from cv2 import aruco
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt

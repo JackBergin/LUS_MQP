@@ -13,7 +13,7 @@ import csv
 from cv2 import pointPolygonTest
 from numpy import NAN
 
-from regex import F
+#from regex import F
 
 def plot_Point():
     # This function will plot a point in the center of the screen

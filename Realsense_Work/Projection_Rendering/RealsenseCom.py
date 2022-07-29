@@ -4,7 +4,6 @@ import numpy as np                        # fundamental package for scientific c
 import matplotlib.pyplot as plt           # 2D plotting library producing publication quality figures
 from pyntcloud import PyntCloud # open source library for 3D pointcloud visualisation
 import pyrealsense2 as rs                 # Intel RealSense cross-platform open-source API
-import csv
 
 def main():
   print("Environment Ready")
