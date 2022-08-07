@@ -1,3 +1,4 @@
+from curses.ascii import ETB
 from shutil import SpecialFileError
 import cv2                                # state of the art computer vision algorithms library
 import numpy as np                        # fundamental package for scientific computing
@@ -26,12 +27,30 @@ def main():
 
     depth_frame = frameset.get_depth_frame()
     pointcloud = pc.calculate(depth_frame)
+    size = pointcloud.size()
 
-    print("Size: ", pointcloud.size())    
+    print("Size: ", size)    
     vtx = np.asanyarray(pointcloud.get_vertices())
     
-    print(vtx[1])
+    print(vtx[4545:4547])
+    np.delete(vtx, 4545, 0)
+    print(vtx[4545:4547])
+
     '''
+    parseVTX = vtx[1]    
+    
+    parseVTX = []
+    correctedPointcloud = []
+
+    for i in range(size):
+      parseVTX = vtx[i]
+      if parseVTX[2] == 0.0 or parseVTX[2] == -0.0:
+        np.delete(vtx, i, 0)
+      else:
+        print("Position = ", i)
+        print("Value = ", vtx[i])
+
+
     with open('Projection_Rendering/testCorners.csv', 'w') as f:
         writer = csv.writer(f)
         for i in range(pointcloud.size()):
