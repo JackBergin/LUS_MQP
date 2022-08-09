@@ -1,10 +1,10 @@
 import cv2 
 from matplotlib import pyplot as plt
 
-im_cont = cv2.imread("DensePoseData/densepose_contour.0001.png")
-im_segm = cv2.imread("DensePoseData/densepose_segment.0001.png")
-im_u = cv2.imread("DensePoseData/densepose_u.0001.png")
-im_v = cv2.imread("DensePoseData/densepose_v.0001.png")
+im_cont = cv2.imread("results/densepose_contour.0001.png")
+im_segm = cv2.imread("results/densepose_segment.0001.png")
+im_u = cv2.imread("results/densepose_u.0001.png")
+im_v = cv2.imread("results/densepose_v.0001.png")
 
 plt.rcParams["figure.figsize"]=20,20
 plt.subplot(2,2,1)
