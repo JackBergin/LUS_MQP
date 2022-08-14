@@ -93,19 +93,46 @@ def convertCalibrationPoints(imageCoordX, imageCoordY):
             convertedYPoint = 0
     else:
         print("Out of Y range!")
-
-
+    
+    #Debug prints
+    print("Converted X Point:")
     print(convertedXPoint)
+    print("Converted Y Point:")
     print(convertedYPoint)
-    return convertedXPoint,convertedYPoint
+    print()
+    
+    return convertedXPoint,convertedYPoint, maxXBound, maxYBound, minXBound, minYBound
 
 def main():
-    xPoint, yPoint = convertCalibrationPoints(315, 267)
+    #Calling transform method
+    xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(316, 270)
+    
+    #Casting to integers
+    xSizeOfScreen = int(maxXBound+minXBound)
+    ySizeOfScreen = int(maxYBound+minYBound)
+    xStartingPoint = int(maxXBound)
+    yStartingPoint = int(maxYBound)
+    
+    #Debug prints
+    print("Current Screen Size:")
+    print(xSizeOfScreen)
+    print(ySizeOfScreen)
+    print()
+    print("Bounds:")
+    print(maxXBound)
+    print(maxYBound)
+    print(minXBound)
+    print(minYBound)
+    print()
+    print("Location of Screen:")
+    print(xStartingPoint)
+    print(yStartingPoint)
+    
 
     glutInit()
     glutInitDisplayMode(GLUT_RGB)
-    glutInitWindowSize(1370, 720)
-    glutInitWindowPosition(0, 0)
+    glutInitWindowSize(xSizeOfScreen, ySizeOfScreen)
+    glutInitWindowPosition(xStartingPoint, yStartingPoint)
     glutCreateWindow("Point")
     glutDisplayFunc(plot_Point)
     glTranslated(xPoint,yPoint,0.0)
