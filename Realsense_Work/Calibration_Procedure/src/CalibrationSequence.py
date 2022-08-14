@@ -2,12 +2,8 @@
 
 # import the necessary packages
 import numpy as np
-import cv2, os
 from cv2 import aruco
-from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
-import matplotlib as mpl
-import pandas as pd
 
 import cv2 as cv2
 from GetSurfaceNormal import *
@@ -158,12 +154,13 @@ if __name__ == "__main__":
         color_depth_stack = np.vstack(
             (get_realsense_data.color_image, get_realsense_data.depth_colormap))
 
-        filename = 'Calibration-1'
+        filename = 'Calibration1'
         cv2.imshow(str(filename), color_depth_stack)
-        cv2.imwrite('Realsense_Work/Calibration_Procedure/image/' + str(filename) + '.png', get_realsense_data.color_image)
+        cv2.imwrite('Realsense_Work/Calibration_Procedure/image/calibrationImg.png', get_realsense_data.color_image)
 
-        frame = cv2.imread('Realsense_Work/Calibration_Procedure/image/'+filename+'.png')
+        frame = cv2.imread('Realsense_Work/Calibration_Procedure/image/calibrationImg.png')
         plt.figure()
+        
         plt.imshow(frame)
         plt.show()
         
@@ -218,7 +215,7 @@ if __name__ == "__main__":
             0.5, (0, 255, 0), 2)
           print("[INFO] ArUco marker ID: {}".format(markerID))
           # show the output frame
-          cv2.imwrite('Realsense_Work/Calibration_Procedure/type/' + str(filename) + '_det.png', frame)
+          cv2.imwrite('Realsense_Work/Calibration_Procedure/type/calibration_det.png', frame)
         plt.imshow(frame_markers)
         print(p)
         p = np.array(p)
@@ -235,6 +232,6 @@ if __name__ == "__main__":
             for i in range(len(ids)):
                writer.writerow(corners)
 
-        np.save('Realsense_Work/Calibration_Procedure/type/' + str(filename) + '.npy', p)
+        np.save('Realsense_Work/Calibration_Procedure/type/calibration.npy', p)
     
 
