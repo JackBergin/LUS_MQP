@@ -7,6 +7,8 @@
 
 from cmath import nan
 from time import sleep
+from PyOpenGL import *
+from OpenGL import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
@@ -36,7 +38,7 @@ def getCalibrationPoints():
     id = []
     x = []
     y = []
-    with open('Realsense_Work/Projection_Rendering/calibratedWorkSpace.csv', 'r') as csvfile:
+    with open('calibratedWorkSpace.csv', 'r') as csvfile:
         f = csv.reader(csvfile, delimiter = ',')
         for row in f:
             id.append(row[0])
@@ -104,18 +106,32 @@ def convertCalibrationPoints(imageCoordX, imageCoordY):
     
     return convertedXPoint,convertedYPoint, maxXBound, maxYBound, minXBound, minYBound
 
+def selectPoint(enteredID):
+    id, x, y = getCalibrationPoints()
+    for i in range(len(x)):
+       if(id[i] == enteredID):
+        return x[i],y[i]
+       else: 
+        return 0,0
+        
 def main():
     #Calling transform method
-    xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(316, 270) #10
-    x1Point, y1Point, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(313, 220) #9
-    x2Point, y2Point, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(319, 322) #11
-    x3Point, y3Point, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(367, 268) #6
-    x4Point, y4Point, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(364, 217) #5
-    x5Point, y5Point, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(423, 317) #3
-    x6Point, y6Point, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(419, 265) #2
-    x7Point, y7Point, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(416, 214) #1
-
-
+    xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(328, 314) #10
+    '''
+    (11, 331, 377)
+    (7, 393, 374)
+    (3, 455, 372)
+    (2, 451, 308)
+    (1, 448, 247)
+    (3, 204, 390)
+    (4, 568, 382)
+    (10, 328, 314)
+    (6, 390, 311)
+    (5, 386, 250)
+    (1, 201, 223)
+    (2, 560, 209)
+    (9, 325, 253)
+    '''
     #Casting to integers
     xSizeOfScreen = int(maxXBound+minXBound)
     ySizeOfScreen = int(maxYBound+minYBound)
@@ -144,34 +160,10 @@ def main():
     glutInitWindowPosition(round(xStartingPoint*1.14), round(yStartingPoint*0.225))
     glutCreateWindow("Point")
     glutDisplayFunc(plot_Point)
-    '''
-    Tested Points:
+    
+    #Tested Points:
     glTranslated(xPoint,yPoint,0.0)
     clearScreen()
-    '''
-    
-
-    glTranslated(x1Point,y1Point,0.0)
-    clearScreen()
-    '''
-
-    glTranslated(x2Point,y2Point,0.0)
-    sleep(1)
-    clearScreen()
-    glTranslated(x3Point,y3Point,0.0)
-    sleep(1)
-    clearScreen()
-    glTranslated(x4Point,y4Point,0.0)
-    sleep(1)
-    clearScreen()
-    glTranslated(x5Point,y5Point,0.0)
-    sleep(1)
-    clearScreen()
-    glTranslated(x6Point,y6Point,0.0)
-    sleep(1)
-    clearScreen()
-    glTranslated(x7Point,y7Point,0.0)
-    '''
     glutMainLoop()
 
 main()
