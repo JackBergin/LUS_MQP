@@ -4,10 +4,11 @@
 # and then from there be able to localize a projection within our anybeam projector on to the wall
 # localized to the realsense's reference frame
 
+import sys
+sys.path.append("/home/medfuslab/anaconda3/lib/python3.9/site-packages")
 
 from cmath import nan
 from time import sleep
-from PyOpenGL import *
 from OpenGL import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
@@ -38,7 +39,7 @@ def getCalibrationPoints():
     id = []
     x = []
     y = []
-    with open('calibratedWorkSpace.csv', 'r') as csvfile:
+    with open('Realsense_Work/Projection_Rendering/calibratedWorkSpace.csv', 'r') as csvfile:
         f = csv.reader(csvfile, delimiter = ',')
         for row in f:
             id.append(row[0])
@@ -116,22 +117,10 @@ def selectPoint(enteredID):
         
 def main():
     #Calling transform method
-    xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(328, 314) #10
-    '''
-    (11, 331, 377)
-    (7, 393, 374)
-    (3, 455, 372)
-    (2, 451, 308)
-    (1, 448, 247)
-    (3, 204, 390)
-    (4, 568, 382)
-    (10, 328, 314)
-    (6, 390, 311)
-    (5, 386, 250)
-    (1, 201, 223)
-    (2, 560, 209)
-    (9, 325, 253)
-    '''
+    xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(329, 381) #10
+    
+    
+
     #Casting to integers
     xSizeOfScreen = int(maxXBound+minXBound)
     ySizeOfScreen = int(maxYBound+minYBound)
@@ -156,8 +145,8 @@ def main():
 
     glutInit()
     glutInitDisplayMode(GLUT_RGB)
-    glutInitWindowSize(round(xSizeOfScreen*1.525), round(ySizeOfScreen*1.015))
-    glutInitWindowPosition(round(xStartingPoint*1.14), round(yStartingPoint*0.225))
+    glutInitWindowSize(1350,720)
+    glutInitWindowPosition(0,0)
     glutCreateWindow("Point")
     glutDisplayFunc(plot_Point)
     
