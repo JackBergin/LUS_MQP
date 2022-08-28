@@ -6,6 +6,7 @@
 
 
 from cmath import nan
+from time import sleep
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
@@ -105,8 +106,16 @@ def convertCalibrationPoints(imageCoordX, imageCoordY):
 
 def main():
     #Calling transform method
-    xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(316, 270)
-    
+    xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(316, 270) #10
+    x1Point, y1Point, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(313, 220) #9
+    x2Point, y2Point, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(319, 322) #11
+    x3Point, y3Point, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(367, 268) #6
+    x4Point, y4Point, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(364, 217) #5
+    x5Point, y5Point, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(423, 317) #3
+    x6Point, y6Point, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(419, 265) #2
+    x7Point, y7Point, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(416, 214) #1
+
+
     #Casting to integers
     xSizeOfScreen = int(maxXBound+minXBound)
     ySizeOfScreen = int(maxYBound+minYBound)
@@ -131,12 +140,38 @@ def main():
 
     glutInit()
     glutInitDisplayMode(GLUT_RGB)
-    glutInitWindowSize(xSizeOfScreen, ySizeOfScreen)
-    glutInitWindowPosition(xStartingPoint, yStartingPoint)
+    glutInitWindowSize(round(xSizeOfScreen*1.525), round(ySizeOfScreen*1.015))
+    glutInitWindowPosition(round(xStartingPoint*1.14), round(yStartingPoint*0.225))
     glutCreateWindow("Point")
     glutDisplayFunc(plot_Point)
+    '''
+    Tested Points:
     glTranslated(xPoint,yPoint,0.0)
     clearScreen()
+    '''
+    
+
+    glTranslated(x1Point,y1Point,0.0)
+    clearScreen()
+    '''
+
+    glTranslated(x2Point,y2Point,0.0)
+    sleep(1)
+    clearScreen()
+    glTranslated(x3Point,y3Point,0.0)
+    sleep(1)
+    clearScreen()
+    glTranslated(x4Point,y4Point,0.0)
+    sleep(1)
+    clearScreen()
+    glTranslated(x5Point,y5Point,0.0)
+    sleep(1)
+    clearScreen()
+    glTranslated(x6Point,y6Point,0.0)
+    sleep(1)
+    clearScreen()
+    glTranslated(x7Point,y7Point,0.0)
+    '''
     glutMainLoop()
 
 main()

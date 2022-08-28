@@ -140,7 +140,6 @@ class CalibrationSequence():
             dev.hardware_reset()
         print("reset done")
 
-# test case
 if __name__ == "__main__":
     get_realsense_data = CalibrationSequence()
     get_realsense_data.hardware_reset_RS()
