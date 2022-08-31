@@ -14,3 +14,17 @@ technologies for the foreseeable future. One of the fields currently looking to 
 or entertainment is the medical industry. There are an uncountable number of applications of AR in the medical industry. This project is meant to 
 test and implement one of those applications. If successful, this method could go on to serve as a foundation for several other operations and use 
 cases. 
+
+
+## Setup
+1. Make sure you are running the most recent version of Python 3.
+2. Implement the PyOpenGL library software.
+3. Implement the Detectron2 library software.
+4. Implement the CV2 library software.
+5. Clone the repository
+
+## Running the environment
+1. This project is supposed to be opened as the folder in VS code.
+2. From there the directoruy in wich the project runs depends on which part of the project is being implemented.
+  a. For the Realsense Work make sure that you are in this directory in the terminal to run any of the sub directories.
+  b. For the Detectron Work, make sure you are in this directory in the terminal to run any of the sub directories.
