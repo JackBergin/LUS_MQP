@@ -26,5 +26,7 @@ cases.
 ## Running the environment
 1. This project is supposed to be opened as the folder in VS code.
 2. From there the directoruy in wich the project runs depends on which part of the project is being implemented.
-a. For the Realsense Work make sure that you are in this directory in the terminal to run any of the sub directories.
-b. For the Detectron Work, make sure you are in this directory in the terminal to run any of the sub directories.
+ 
+  i. For the Realsense Work make sure that you are in this directory in the terminal to run any of the sub directories.
+  
+  ii.  For the Detectron Work, make sure you are in this directory in the terminal to run any of the sub directories.
