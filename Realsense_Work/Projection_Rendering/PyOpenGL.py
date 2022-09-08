@@ -65,13 +65,30 @@ def getCalibrationPoints():
 
     return floatID, floatX, floatY
 
+def getCornerPoints():
+    x = []
+    y = []
+    with open('Realsense_Work/Projection_Rendering/arUCoCorners.csv', 'r') as csvfile:
+        f = csv.reader(csvfile, delimiter = ',')
+        for row in f:
+            x.append(row[0])
+            y.append(row[1])
+    
+    floatX = []  
+    floatY = []
+    for j in range(4):
+        floatX.append(float(x[j]))
+        floatY.append(float(y[j]))
+    
+    return floatX, floatY
+    
 def convertCalibrationPoints(imageCoordX, imageCoordY):
-    id, x, y = getCalibrationPoints()
+    xLim, yLim = getCornerPoints()
 
-    minXBound = min(x)
-    minYBound = min(y)
-    maxXBound = max(x)
-    maxYBound = max(y)
+    minXBound = min(xLim)
+    minYBound = min(yLim)
+    maxXBound = max(xLim)
+    maxYBound = max(yLim)
     averageX = ((maxXBound-minXBound)/2)+minXBound
     averageY = ((maxYBound-minYBound)/2)+minYBound
     
@@ -117,7 +134,7 @@ def selectPoint(enteredID):
         
 def main():
     #Calling transform method
-    xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(329, 381) #10
+    xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(387, 260) #10
     
     
 
@@ -145,8 +162,8 @@ def main():
 
     glutInit()
     glutInitDisplayMode(GLUT_RGB)
-    glutInitWindowSize(1350,720)
-    glutInitWindowPosition(0,0)
+    glutInitWindowSize(1100,500)
+    glutInitWindowPosition(350,20)
     glutCreateWindow("Point")
     glutDisplayFunc(plot_Point)
     
