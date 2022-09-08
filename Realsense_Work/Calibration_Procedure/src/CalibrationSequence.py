@@ -174,7 +174,7 @@ if __name__ == "__main__":
         print(type(corners))
         
         p = []
-        
+        addCorners = []
         # verify *at least* one ArUco marker was detected
         if len(corners) > 0:
         # flattefn the ArUco IDs list
@@ -185,6 +185,19 @@ if __name__ == "__main__":
           # top-left, top-right, bottom-right, and bottom-left order)
           corners = markerCorner.reshape((4, 2))
           (topLeft, topRight, bottomRight, bottomLeft) = corners
+
+          if(markerID == 1):
+            addCorners.append(topLeft)
+          elif(markerID == 2):
+            addCorners.append(topRight)
+          elif(markerID == 3):
+            addCorners.append(bottomLeft)
+          elif(markerID == 4):
+            addCorners.append(bottomRight)
+          else:
+            print('Not a corner marker')
+            print(markerID)
+
           # convert each of the (x, y)-coordinate pairs to integers
           topRight = (int(topRight[0]), int(topRight[1]))
           bottomRight = (int(bottomRight[0]), int(bottomRight[1]))
@@ -226,10 +239,10 @@ if __name__ == "__main__":
             for i in range(len(ids)):
                writer.writerow(p[i])
 
-        with open('Realsense_Work/Projection_Rendering/testCorners.csv', 'w') as f:
+        with open('Realsense_Work/Projection_Rendering/arUCoCorners.csv', 'w') as f:
             writer = csv.writer(f)
-            for i in range(len(ids)):
-               writer.writerow(corners)
+            for i in range(4):
+                writer.writerow(addCorners[i])
 
         np.save('Realsense_Work/Calibration_Procedure/type/calibration.npy', p)
     
