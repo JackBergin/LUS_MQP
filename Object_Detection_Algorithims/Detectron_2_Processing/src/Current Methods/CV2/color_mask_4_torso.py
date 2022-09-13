@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-
+import sys
+sys.path.append("/usr/local/lib/python3.10/site-packages")
 import numpy as np
 import cv2
 import csv
