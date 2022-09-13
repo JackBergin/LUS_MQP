@@ -7,6 +7,7 @@
 import sys
 sys.path.append("/home/medfuslab/anaconda3/lib/python3.9/site-packages")
 
+import subprocess
 from cmath import nan
 from time import sleep
 from OpenGL import *
@@ -16,14 +17,13 @@ from OpenGL.GLUT import *
 import csv
 from cv2 import pointPolygonTest
 from numpy import NAN
-
-#from regex import F
+import RS_Read as rs
 
 def plot_Point():
     # This function will plot a point in the center of the screen
     glClear(GL_COLOR_BUFFER_BIT)
-    glColor3f(0.0,1.0,0.0)
-    glPointSize(5.0)
+    glColor3f(1.0,0.0,0.0)
+    glPointSize(20.0)
     glBegin(GL_POINTS)
     glVertex2f(0.0, 0.0)
     glEnd()
@@ -39,7 +39,7 @@ def getCalibrationPoints():
     id = []
     x = []
     y = []
-    with open('Realsense_Work/Projection_Rendering/calibratedWorkSpace.csv', 'r') as csvfile:
+    with open('LUS_Sequence/Projection/data/calibratedWorkSpace.csv', 'r') as csvfile:
         f = csv.reader(csvfile, delimiter = ',')
         for row in f:
             id.append(row[0])
@@ -68,7 +68,7 @@ def getCalibrationPoints():
 def getCornerPoints():
     x = []
     y = []
-    with open('Realsense_Work/Projection_Rendering/arUCoCorners.csv', 'r') as csvfile:
+    with open('LUS_Sequence/Projection/data/arUCoCorners.csv', 'r') as csvfile:
         f = csv.reader(csvfile, delimiter = ',')
         for row in f:
             x.append(row[0])
@@ -133,32 +133,10 @@ def selectPoint(enteredID):
         return 0,0
         
 def main():
-    #Calling transform method
-    xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(327, 260) #10
-    
-    
-
-    #Casting to integers
-    xSizeOfScreen = int(maxXBound+minXBound)
-    ySizeOfScreen = int(maxYBound+minYBound)
-    xStartingPoint = int(maxXBound)
-    yStartingPoint = int(maxYBound)
-    
-    #Debug prints
-    print("Current Screen Size:")
-    print(xSizeOfScreen)
-    print(ySizeOfScreen)
-    print()
-    print("Bounds:")
-    print(maxXBound)
-    print(maxYBound)
-    print(minXBound)
-    print(minYBound)
-    print()
-    print("Location of Screen:")
-    print(xStartingPoint)
-    print(yStartingPoint)
-    
+    # Calls detectron2
+    rs.main()
+    filename = 'LUS_Sequence/Projection/detectron2/launchDetectron.sh'
+    subprocess.call(['sh', './LUS_Sequence/Projection/detectron2/launchDetectron.sh'])
 
     glutInit()
     glutInitDisplayMode(GLUT_RGB)

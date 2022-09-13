@@ -134,9 +134,7 @@ def selectPoint(enteredID):
         
 def main():
     #Calling transform method
-    xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(327, 260) #10
-    
-    
+    xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(327, 260) #10    
 
     #Casting to integers
     xSizeOfScreen = int(maxXBound+minXBound)
