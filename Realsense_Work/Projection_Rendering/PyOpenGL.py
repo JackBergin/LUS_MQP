@@ -134,7 +134,7 @@ def selectPoint(enteredID):
         
 def main():
     #Calling transform method
-    xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(387, 260) #10
+    xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(327, 260) #10
     
     
 
@@ -162,8 +162,8 @@ def main():
 
     glutInit()
     glutInitDisplayMode(GLUT_RGB)
-    glutInitWindowSize(1100,500)
-    glutInitWindowPosition(350,20)
+    glutInitWindowSize(1150,500)
+    glutInitWindowPosition(320,100)
     glutCreateWindow("Point")
     glutDisplayFunc(plot_Point)
     
