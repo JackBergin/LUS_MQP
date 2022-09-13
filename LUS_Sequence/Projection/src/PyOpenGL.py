@@ -18,6 +18,7 @@ import csv
 from cv2 import pointPolygonTest
 from numpy import NAN
 import RS_Read as rs
+import color_mask_4_torso as mask
 
 def plot_Point():
     # This function will plot a point in the center of the screen
@@ -137,6 +138,13 @@ def main():
     rs.main()
     filename = 'LUS_Sequence/Projection/detectron2/launchDetectron.sh'
     subprocess.call(['sh', './LUS_Sequence/Projection/detectron2/launchDetectron.sh'])
+    
+    detectronX = []
+    detectronY = []
+    detectronX, detectronY = mask.masking()
+
+    # Calling transform method
+    xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(327, 260)    
 
     glutInit()
     glutInitDisplayMode(GLUT_RGB)
