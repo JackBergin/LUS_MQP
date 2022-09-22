@@ -241,7 +241,7 @@ if __name__ == "__main__":
 
         with open('Realsense_Work/Projection_Rendering/arUCoCorners.csv', 'w') as f:
             writer = csv.writer(f)
-            for i in range(4):
+            for i in range(len(ids)):
                 writer.writerow(addCorners[i])
 
         np.save('Realsense_Work/Calibration_Procedure/type/calibration.npy', p)

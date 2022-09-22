@@ -27,6 +27,9 @@ def plot_Point():
     glPointSize(20.0)
     glBegin(GL_POINTS)
     glVertex2f(0.0, 0.0)
+    glVertex2f(0.5, 0.5)
+    glVertex2f(-0.5, -0.5)
+    glVertex2f(0.5, -0.5)
     glEnd()
     glFlush()
 
@@ -154,7 +157,7 @@ def main():
     glutDisplayFunc(plot_Point)
     
     #Tested Points:
-    glTranslated(xPoint,yPoint,0.0)
+    glTranslated(0,0,0.0)
     clearScreen()
     glutMainLoop()
 
