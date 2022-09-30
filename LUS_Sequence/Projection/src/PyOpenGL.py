@@ -145,7 +145,25 @@ def main():
     detectronX = []
     detectronY = []
     detectronX, detectronY = mask.masking()
+    
+    desiredX_Coords = []
+    desiredY_Coords = []
 
+    for i in range(len(detectronX)):
+        if(i == len(detectronX)/4):
+            desiredX_Coords.append(detectronX[i])
+            desiredY_Coords.append(detectronY[i])
+        elif(i == len(detectronX)/2):
+            desiredX_Coords.append(detectronX[i])
+            desiredY_Coords.append(detectronY[i])
+        elif(i == len(detectronX)*0.75):
+            desiredX_Coords.append(detectronX[i])
+            desiredY_Coords.append(detectronY[i])
+        elif(i == len(detectronX)):
+            desiredX_Coords.append(detectronX[i])
+            desiredY_Coords.append(detectronY[i])
+
+    print(desiredX_Coords, desiredY_Coords)
     # Calling transform method
     xPoint, yPoint, maxXBound, maxYBound, minXBound, minYBound = convertCalibrationPoints(327, 260)    
 
