@@ -76,7 +76,7 @@ def getCornerPoints():
     
     floatX = []  
     floatY = []
-    for j in range(4):
+    for j in range(3):
         floatX.append(float(x[j]))
         floatY.append(float(y[j]))
     
