@@ -18,15 +18,13 @@ cases.
 
 ## Setup
 1. Make sure you are running the most recent version of Python 3.
-2. Implement the PyOpenGL library software.
-3. Implement the Detectron2 library software.
-4. Implement the CV2 library software.
-5. Clone the repository
+2. Download the PyOpenGL library software.
+3. Download the Detectron2 library software.
+4. Download the CV2 library software.
+5. Download the RealSense SDK
+6. Have Ubuntu 18.04 environment for SDK.
+7. Clone the repository
 
 ## Running the environment
 1. This project is supposed to be opened as the folder in VS code.
-2. From there the directoruy in wich the project runs depends on which part of the project is being implemented.
- 
-  i. For the Realsense Work make sure that you are in this directory in the terminal to run any of the sub directories.
-  
-  ii.  For the Detectron Work, make sure you are in this directory in the terminal to run any of the sub directories.
+2. The primary project folder is "LUS_Sequence" and the other two folders hold all of the research and development done on both ends of the project. This was done in an agile like way so that both large parts of the project could be easily merged.
