@@ -2,7 +2,6 @@
 
 # import the necessary packages
 import numpy as np
-from cv2 import aruco
 import matplotlib.pyplot as plt
 
 import cv2 as cv2
@@ -164,10 +163,10 @@ if __name__ == "__main__":
         plt.show()
         
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        aruco_dict = aruco.Dictionary_get(aruco.DICT_6X6_250)
-        parameters =  aruco.DetectorParameters_create()
-        corners, ids, rejectedImgPoints = aruco.detectMarkers(gray, aruco_dict, parameters=parameters)
-        frame_markers = aruco.drawDetectedMarkers(frame.copy(), corners, ids)
+        aruco_dict = cv2.Dictionary_get(cv2.DICT_6X6_250)
+        parameters =  cv2.DetectorParameters_create()
+        corners, ids, rejectedImgPoints = cv2.detectMarkers(gray, aruco_dict, parameters=parameters)
+        frame_markers = cv2.drawDetectedMarkers(frame.copy(), corners, ids)
 
         print('Corners: ')
         print(corners)

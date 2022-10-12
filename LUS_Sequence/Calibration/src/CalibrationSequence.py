@@ -1,10 +1,9 @@
 #! /usr/bin/env python3
 
 # import the necessary packages
-import numpy as np
 from cv2 import aruco
+import numpy as np
 import matplotlib.pyplot as plt
-
 import cv2 as cv2
 from GetSurfaceNormal import *
 from pyrealsense2 import pyrealsense2 as rs
@@ -142,7 +141,7 @@ class CalibrationSequence():
 
 if __name__ == "__main__":
     get_realsense_data = CalibrationSequence()
-    get_realsense_data.hardware_reset_RS()
+    #get_realsense_data.hardware_reset_RS()
     cv2.namedWindow('RGB-depth', cv2.WINDOW_AUTOSIZE)
     while True:
         key = cv2.waitKey(10)
@@ -155,9 +154,9 @@ if __name__ == "__main__":
 
         filename = 'Calibration1'
         cv2.imshow(str(filename), color_depth_stack)
-        cv2.imwrite('Realsense_Work/Calibration_Procedure/image/calibrationImg.png', get_realsense_data.color_image)
-
-        frame = cv2.imread('Realsense_Work/Calibration_Procedure/image/calibrationImg.png')
+        cv2.imwrite('LUS_Sequence/Calibration/image/calibrationImg.png', get_realsense_data.color_image)
+        
+        frame = cv2.imread('LUS_Sequence/Calibration/image/calibrationImg.png')
         plt.figure()
         
         plt.imshow(frame)
@@ -227,23 +226,23 @@ if __name__ == "__main__":
             0.5, (0, 255, 0), 2)
           print("[INFO] ArUco marker ID: {}".format(markerID))
           # show the output frame
-          cv2.imwrite('Realsense_Work/Calibration_Procedure/type/calibration_det.png', frame)
+          cv2.imwrite('LUS_Sequence/Calibration/type/calibration_det.png', frame)
         plt.imshow(frame_markers)
         print(p)
         p = np.array(p)
         p = p.reshape((len(ids), 3))
         print(p.size)
         
-        with open('Realsense_Work/Projection_Rendering/calibratedWorkSpace.csv', 'w') as f:
+        with open('LUS_Sequence/Projection/calibratedWorkSpace.csv', 'w') as f:
             writer = csv.writer(f)
             for i in range(len(ids)):
                writer.writerow(p[i])
 
-        with open('Realsense_Work/Projection_Rendering/arUCoCorners.csv', 'w') as f:
+        with open('LUS_Sequence/Projection/arUCoCorners.csv', 'w') as f:
             writer = csv.writer(f)
             for i in range(len(ids)):
                 writer.writerow(addCorners[i])
 
-        np.save('Realsense_Work/Calibration_Procedure/type/calibration.npy', p)
+        np.save('LUS_Sequence/Calibration/type/calibration.npy', p)
     
 
